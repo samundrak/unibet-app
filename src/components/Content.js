@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import Carousel from './Carousel/index';
 
 const Content = () => {
   return (
@@ -20,7 +21,9 @@ const Content = () => {
           watch the action live with Unibet TV on the desktop site.
         </p>
       </aside>
-      <div id="live-matches" />
+      <div id="live-matches">
+        <Carousel />
+      </div>
     </Fragment>
   );
 };
