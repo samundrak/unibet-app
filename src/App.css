@@ -1,33 +1,87 @@
-.App {
+body {
+  background: #333;
+  font-family: 'RobotoRegular', 'Roboto', 'Droid Sans', 'Helvetica Neue',
+    'Segoe UI', 'Segoe', 'Open Sans', 'Helvetica', 'Arial', sans serif;
+  font-size: 14px;
+  line-height: 20px;
+  margin: 0;
+  padding: 0;
+}
+#container {
+  background-image: radial-gradient(#2f8e2c, #2e7423);
+  background-color: #2e7423;
   text-align: center;
 }
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+header {
+  width: 900px;
+  text-align: left;
+  margin: 0 auto;
+  padding: 20px 0;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+nav {
+  background: #222;
 }
-
-.App-link {
-  color: #61dafb;
+nav ul {
+  width: 900px;
+  text-align: left;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+nav ul li {
+  margin: 0;
+  padding: 12px 0 12px 4px;
+}
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+#logo {
+  height: 33px;
+  background: url(/images/unibet-logo.png) no-repeat;
+  background-size: 200px 33px;
+  text-indent: -999em;
+}
+#content {
+  width: 900px;
+  text-align: left;
+  margin: 16px auto;
+}
+article {
+  padding: 8px 16px 16px;
+  background: #fff;
+  border-radius: 4px;
+  overflow: hidden;
+}
+article h1 {
+  font-size: 22px;
+}
+article .preamble {
+  font-weight: bold;
+}
+article aside {
+  float: right;
+  width: 220px;
+  border-left: solid 1px #ccc;
+  margin-left: 8px;
+  padding: 0 0 8px 16px;
+}
+article aside h2 {
+  font-size: 15px;
+  margin: 4px 0;
+}
+article aside img {
+  width: 220px;
+}
+footer {
+  background: #333;
+  color: #999;
+}
+footer .inner {
+  width: 900px;
+  text-align: left;
+  margin: 0 auto;
+}
+footer .inner p {
+  padding: 16px 8px;
 }
