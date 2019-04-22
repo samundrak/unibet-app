@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const Container = styled.div`
   width: 600px;
-  height: 400px;
+  height: 300px;
   display: flex;
   overflow: hidden;
   position: relative;
@@ -20,7 +20,7 @@ const Handle = styled.div`
 `;
 const Item = styled.div`
   width: 600px;
-  height: 400px;
+  height: 300px;
   background-color: black;
 `;
 const Rings = styled.div`
