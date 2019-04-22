@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import Carousel from './Carousel/index';
+import ScoreBoard from './Scoreboard';
 
 const Content = () => {
   return (
@@ -22,7 +23,10 @@ const Content = () => {
         </p>
       </aside>
       <div id="live-matches">
-        <Carousel />
+        <Carousel>
+          <ScoreBoard />
+          <ScoreBoard />
+        </Carousel>
       </div>
     </Fragment>
   );

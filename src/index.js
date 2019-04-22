@@ -11,7 +11,7 @@ import Dexie from './core/Storage/providers/Dexie';
 const storage = new Storage(new Dexie());
 const scheduler = new ScheduleRunner({ interval: 60000 * 2 });
 scheduler.addRunner(new LiveScoreFetcher(storage));
-scheduler.start();
+// scheduler.start();
 console.log(process.env);
 ReactDOM.render(<App />, document.getElementById('root'));
 
