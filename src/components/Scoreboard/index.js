@@ -13,7 +13,7 @@ class ScoreBoard extends React.Component {
     return (
       <Container>
         <Score>
-          <ScoreItem>15</ScoreItem>-<ScoreItem>0</ScoreItem>
+          <ScoreItem>15</ScoreItem>-<ScoreItem>{this.props.index}</ScoreItem>
         </Score>
         <TeamLabelBox>
           <TeamName>Bedene, Aljaz</TeamName>-<TeamName> Daniel, Taro</TeamName>

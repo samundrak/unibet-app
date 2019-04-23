@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 const Container = styled.div`
-  width: 600px;
-  height: 300px;
+  width: ${(props) => props.width || 600};
+  height: ${(props) => props.height || 400};
   display: flex;
   overflow: hidden;
   position: relative;
@@ -17,11 +17,20 @@ const Handle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+  opacity: 0.3;
+  transition: opacity 0.5s;
+  z-index: 9;
+  &:hover {
+    opacity: 1;
+  }
 `;
 const Item = styled.div`
-  width: 600px;
-  height: 300px;
+  width: inherit;
+  height: inherit;
   background-color: black;
+  color: white;
+  transition: all 0.5s ease; /* our nice transition */
 `;
 const Rings = styled.div`
   position: absolute;
@@ -39,4 +48,5 @@ const Ring = styled.div`
   background: white;
 `;
 
-export { Container, Ring, Handle, Item, Rings };
+const SliderContainer = styled.div``;
+export { Container, SliderContainer, Ring, Handle, Item, Rings };
