@@ -23,9 +23,12 @@ const Content = () => {
         </p>
       </aside>
       <div id="live-matches">
-        <Carousel>
-          <ScoreBoard />
-          <ScoreBoard />
+        <Carousel width="600px" height="400px">
+          <ScoreBoard index={1} />
+          <ScoreBoard index={2} />
+          <ScoreBoard index={3} />
+          <ScoreBoard index={4} />
+          <ScoreBoard index={5} />
         </Carousel>
       </div>
     </Fragment>
