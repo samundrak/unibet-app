@@ -12,6 +12,7 @@ class App extends Component {
     this.controller = new Unibet();
     this.controller.boot();
     this.controller.on(Unibet.EVENT_DATA_STORED, ({ records }) => {
+      console.log(records);
       this.props.actions.updateAllEvents(records);
     });
   }
@@ -21,18 +22,18 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   app: state.app,
 });
-const mapActionsToProps = dispatch => ({
+const mapActionsToProps = (dispatch) => ({
   actions: bindActionCreators(
     {
       ...actions,
     },
-    dispatch,
+    dispatch
   ),
 });
 export default connect(
   mapStateToProps,
-  mapActionsToProps,
+  mapActionsToProps
 )(App);

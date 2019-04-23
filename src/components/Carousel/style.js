@@ -42,10 +42,11 @@ const Rings = styled.div`
 `;
 const Ring = styled.div`
   margin-left: 1%;
-  width: 10px;
-  height: 10px;
+  height: ${(props) => (props.isCurrent ? '3px' : '1px')};
+  width: ${(props) => (props.isCurrent ? '3px' : '1px')};
   border-radius: 100px;
   background: white;
+  transition: all 500ms;
 `;
 
 const SliderContainer = styled.div``;

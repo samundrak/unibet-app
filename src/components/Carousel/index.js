@@ -1,7 +1,7 @@
 import React from 'react';
 import uuid from 'uuid';
 import PropTypes from 'prop-types';
-import { Container, Handle, Item } from './style';
+import { Container, Rings, Ring, Item } from './style';
 
 class Carousel extends React.Component {
   constructor(props) {
@@ -11,10 +11,11 @@ class Carousel extends React.Component {
     this._slideDirection = 'right';
   }
   componentDidMount() {
-    const childrens = this.props.children;
-    console.log(childrens);
-    this.setState({});
-    this.wrapChildren(this.props.children);
+    this.wrapChildren(
+      Array(3)
+        .fill(true)
+        .map(() => this.props.render())
+    );
     this._containerBound = this._containerEl.getBoundingClientRect();
     this.autoSlide();
   }
@@ -35,7 +36,7 @@ class Carousel extends React.Component {
     }, this.props.autoSlideTimeInMS);
   }
   wrapChildren(children) {
-    this._wrappedChildren = this.props.children.map(item => ({
+    this._wrappedChildren = children.map((item) => ({
       id: uuid(),
       item,
     }));
@@ -46,6 +47,9 @@ class Carousel extends React.Component {
     if (currentItem && currentItem.el) {
       currentItem.el.style.marginLeft = '0px';
       this.currentSlideIndex -= 1;
+      this.setState({
+        currentIndex: this.currentSlideIndex,
+      });
     }
   };
   next = () => {
@@ -59,26 +63,34 @@ class Carousel extends React.Component {
     }
     if (currentSlideIndex < this._wrappedChildren.length) {
       this.currentSlideIndex += 1;
+      this.setState({
+        currentIndex: this.currentSlideIndex,
+      });
     }
   };
-
+  componentWillReceiveProps() {}
   render() {
     return (
       <Container
         width={this.props.width}
         height={this.props.height}
-        ref={el => (this._containerEl = el)}
+        ref={(el) => (this._containerEl = el)}
       >
         {this._wrappedChildren.map((children, index) => {
           return (
             <Item
-              ref={el => (this._wrappedChildren[index].el = el)}
+              ref={(el) => (this._wrappedChildren[index].el = el)}
               key={children.id}
             >
               {children.item}
             </Item>
           );
         })}
+        <Rings>
+          {this.props.children.map((item, index) => (
+            <Ring key={index} isCurrent={this.currentSlideIndex === index} />
+          ))}
+        </Rings>
       </Container>
     );
   }

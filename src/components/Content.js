@@ -1,9 +1,10 @@
 import React, { Fragment } from 'react';
+import { connect } from 'react-redux';
 import Carousel from './Carousel/index';
 import ScoreBoard from './Scoreboard';
 
 class Content extends React.Component {
-  handleDataRequest = eventId => {};
+  handleDataRequest = (eventId) => {};
   render() {
     return (
       <Fragment>
@@ -27,15 +28,21 @@ class Content extends React.Component {
         <div id="live-matches">
           <Carousel
             width="600px"
-            height="400px"
+            height="300px"
             onDataRequest={this.handleDataRequest}
             render={() => <ScoreBoard index={1} />}
           >
-            <ScoreBoard index={5} />
+            <ScoreBoard index={1} />
+            <ScoreBoard index={2} />
           </Carousel>
         </div>
       </Fragment>
     );
   }
 }
-export default Content;
+
+const mapStateToProps = (state) => ({
+  app: state.app,
+});
+
+export default connect(mapStateToProps)(Content);
