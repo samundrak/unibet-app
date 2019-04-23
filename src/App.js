@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
 import './App.css';
 import SimpleLayout from './components/SimpleLayout';
 import Unibet from './core/Unibet';
@@ -18,7 +17,7 @@ class App extends Component {
   }
 
   render() {
-    return <SimpleLayout />;
+    return <SimpleLayout controller={this.controller} />;
   }
 }
 
