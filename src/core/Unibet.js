@@ -17,7 +17,9 @@ class Unibet extends EventEmitter {
     let shouldExecuteRunnerImmediate = this.shouldExecuteRunnerImmediate(
       lastFetched,
     );
-    const scheduler = new ScheduleRunner({ interval: 60000 * 2 });
+    const scheduler = new ScheduleRunner({
+      interval: 60000 * Unibet.CACHE_BRUSTING_IN_MINUTE,
+    });
     const liveScoreFetcher = new LiveScoreFetcher();
     liveScoreFetcher.on('data', this.handleNewData.bind(this));
     scheduler.addRunner(liveScoreFetcher);
@@ -29,7 +31,11 @@ class Unibet extends EventEmitter {
   }
 
   shouldExecuteRunnerImmediate(lastFetched) {
-    if (lastFetched && differenceInMinutes(Date.now(), lastFetched) < 2) {
+    if (
+      lastFetched &&
+      differenceInMinutes(Date.now(), lastFetched) <
+        Unibet.CACHE_BRUSTING_IN_MINUTE
+    ) {
       return false;
     }
     return true;
@@ -64,5 +70,6 @@ class Unibet extends EventEmitter {
   }
 }
 
+Unibet.CACHE_BRUSTING_IN_MINUTE = 2;
 Unibet.EVENT_DATA_STORED = 'data:stored';
 export default Unibet;
