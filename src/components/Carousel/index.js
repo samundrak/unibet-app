@@ -7,116 +7,85 @@ class Carousel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tempSlide: [],
+      slides: [],
+      tempArr: [],
+      slideCounter: 0,
     };
-    this._wrappedChildren = [];
-    this.currentSlideIndex = 0;
-    this._slideDirection = 'right';
-    this._slideCounter = 0;
   }
   componentDidMount() {
-    this.wrapChildren(
-      Array(2)
-        .fill(true)
-        .map(() => this.props.render()),
-    );
+    this.setState({
+      slides: Array(2).fill(false),
+    });
     this._containerBound = this._containerEl.getBoundingClientRect();
     this.autoSlide();
   }
   autoSlide() {
     setInterval(() => {
       this.next();
-
-      // if (this._slideDirection === 'right') {
-      //   this.next();
-      //   if (this.currentSlideIndex === this._wrappedChildren.length - 1) {
-      //     this._slideDirection = 'left';
-      //   }
-      // }
-      // if (this._slideDirection === 'left') {
-      //   this.previous();
-      //   if (this.currentSlideIndex < 0) {
-      //     this._slideDirection = 'right';
-      //   }
-      // }
     }, 5000);
   }
-  wrapChildren(children) {
-    this._wrappedChildren = children.map(item => ({
-      id: uuid(),
-      item,
-    }));
-  }
-  previous = () => {
-    const currentSlideIndex = this.currentSlideIndex;
-    const currentItem = this._wrappedChildren[currentSlideIndex];
-    if (currentItem && currentItem.el) {
-      currentItem.el.style.marginLeft = '0px';
-      this.currentSlideIndex -= 1;
+
+  next = () => {
+    const slides = this.state.slides;
+    slides.fill(true);
+    this.setState(
+      {
+        slides,
+      },
+      () => {
+        let slideCounter = this.state.slideCounter;
+        slideCounter += 1;
+        if (slideCounter > this.props.totalCount - 1) {
+          slideCounter = 0;
+        }
+        this.setState({
+          slideCounter,
+        });
+      }
+    );
+  };
+
+  handleAnimationEnd = (index) => {
+    return () => {
+      if (index) {
+        const slides = this.state.slides;
+        slides.shift();
+        slides.push(false);
+        slides.fill(false);
+        this.setState({
+          slides,
+        });
+      }
+    };
+  };
+  componentWillReceiveProps(nextProps) {
+    if (this.state.tempArr.length !== nextProps.totalCount) {
       this.setState({
-        currentIndex: this.currentSlideIndex,
+        tempArr: Array(nextProps.totalCount).fill(true),
       });
     }
-  };
-  next = () => {
-    let slideCounter = this._slideCounter;
-    const currentSlideIndex = this.currentSlideIndex;
-
-    const currentItem = this._wrappedChildren[slideCounter];
-    currentItem.el.style.marginLeft = `-${this._containerBound.width}px`;
-
-    this.currentSlideIndex += 1;
-    if (currentSlideIndex >= 4) {
-      this.currentSlideIndex = 0;
-    }
-
-    slideCounter += 1;
-    if (slideCounter > 1) {
-      slideCounter = 0;
-    }
-    this._slideCounter = slideCounter;
-    this.setState({
-      currentIndex: this.currentSlideIndex,
-    });
-    // const currentSlideIndex = this.currentSlideIndex;
-    // if (currentSlideIndex >= this._wrappedChildren.length - 1) {
-    //   return;
-    // }
-    // const currentItem = this._wrappedChildren[currentSlideIndex];
-    // if (currentItem && currentItem.el) {
-    //   currentItem.el.style.marginLeft = `-${this._containerBound.width}px`;
-    // }
-    // if (currentSlideIndex < this._wrappedChildren.length) {
-    //   this.currentSlideIndex += 1;
-    //   this.setState({
-    //     currentIndex: this.currentSlideIndex,
-    //   });
-    // }
-    // currentItem.el.style.display ='none'
-    // currentItem.el.style.marginLeft = `${this._containerBound.width}px`;
-  };
-  componentWillReceiveProps() {}
+  }
   render() {
     return (
       <Container
         width={this.props.width}
         height={this.props.height}
-        ref={el => (this._containerEl = el)}
+        ref={(el) => (this._containerEl = el)}
       >
-        {this._wrappedChildren.map((children, index) => {
+        {this.state.slides.map((slide, index) => {
           return (
             <Item
-              ref={el => (this._wrappedChildren[index].el = el)}
-              key={children.id}
+              className={slide ? 'slideOutLeft' : ''}
+              key={index}
+              onAnimationEnd={this.handleAnimationEnd(index)}
             >
-              {children.item}
+              {this.props.render(this.state.slideCounter)}
             </Item>
           );
         })}
-
         <Rings>
-          {this.props.children.map((item, index) => (
-            <Ring key={index} isCurrent={this.currentSlideIndex === index} />
+          {this.state.tempArr.map((item, index) => (
+            <Ring key={index} isCurrent={this.state.slideCounter === index} />
           ))}
         </Rings>
       </Container>
@@ -131,5 +100,6 @@ Carousel.propTypes = {
 Carousel.defaultProps = {
   children: () => <div />,
   autoSlideTimeInMS: 3000,
+  totalCount: 1,
 };
 export default Carousel;

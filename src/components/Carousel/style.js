@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 const Container = styled.div`
-  width: ${props => props.width || 600};
-  height: ${props => props.height || 400};
+  width: ${(props) => props.width || 600};
+  height: ${(props) => props.height || 400};
   display: flex;
   overflow: hidden;
   position: relative;
@@ -11,7 +11,7 @@ const Handle = styled.div`
   padding: 1%;
   height: inherit;
   position: absolute;
-  ${props => props.position}: 0;
+  ${(props) => props.position}: 0;
   color: white;
   font-size: 5em;
   display: flex;
@@ -30,6 +30,7 @@ const Item = styled.div`
   height: inherit;
   background-color: black;
   color: white;
+  animation-duration: 500ms;
 `;
 const Rings = styled.div`
   position: absolute;
@@ -41,11 +42,11 @@ const Rings = styled.div`
 `;
 const Ring = styled.div`
   margin-left: 1%;
-  height: ${props => (props.isCurrent ? '3px' : '1px')};
-  width: ${props => (props.isCurrent ? '3px' : '1px')};
+  height: ${(props) => (props.isCurrent ? '3px' : '1px')};
+  width: ${(props) => (props.isCurrent ? '3px' : '1px')};
   border-radius: 100px;
   background: white;
-  transition: all 500ms;
+  transition: all 100ms;
 `;
 
 const SliderContainer = styled.div``;

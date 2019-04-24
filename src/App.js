@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+// import 'animate.css';
 import './App.css';
 import SimpleLayout from './components/SimpleLayout';
 import Unibet from './core/Unibet';

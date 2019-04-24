@@ -29,8 +29,9 @@ class Content extends React.Component {
           <Carousel
             width="600px"
             height="300px"
+            totalCount={20}
             onDataRequest={this.handleDataRequest}
-            render={() => <ScoreBoard index={1} />}
+            render={(slideCounter) => <ScoreBoard index={slideCounter} />}
           >
             <ScoreBoard index={1} />
             <ScoreBoard index={2} />
