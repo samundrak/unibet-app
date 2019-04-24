@@ -26,8 +26,10 @@ class ScheduleRunner extends EventEmitter {
    * Will executes all registered runners as soon as start is called
    * and other will be executed after setInterval
    */
-  start() {
-    this._executeRunners();
+  start(options: { runImmediate: boolean } = { runImmediate: true }) {
+    if (options.runImmediate) {
+      this._executeRunners();
+    }
     this._instanceOfInterval = setInterval(() => {
       this._executeRunners();
     }, this.interval);

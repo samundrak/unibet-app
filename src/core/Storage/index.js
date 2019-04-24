@@ -25,6 +25,17 @@ class Storage {
     console.log('hello world');
     this.db.bulkCreate(records);
   }
+
+  delete(key: string) {
+    return this.db.delete(key);
+  }
+
+  add({ key, value }: { key: string, value: string }) {
+    return this.db.add({ key, value });
+  }
+  all() {
+    return this.db.all();
+  }
 }
 
 export default Storage;

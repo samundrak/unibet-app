@@ -13,13 +13,16 @@ class Dexie implements DBContract {
       records: '++id',
       preferences: 'key',
     });
+    window.dv = this;
   }
 
   setTable(table: string): Dexie {
     this.table = table;
     return this;
   }
-  get(key: string) {}
+  get(key: string) {
+    return this.db[this.table].get({ key });
+  }
 
   set(key: string, value: string): Dexie {
     return this;
@@ -33,6 +36,18 @@ class Dexie implements DBContract {
   bulkCreate(records: Array<any>) {
     if (!this.db[this.table]) return;
     return this.db[this.table].bulkAdd(records);
+  }
+
+  delete(key: string) {
+    return this.db[this.table].delete(key);
+  }
+
+  add({ key, value }: { key: string, value: any }) {
+    return this.db[this.table].add({ key, value });
+  }
+
+  all() {
+    return this.db[this.table].toArray();
   }
 }
 Dexie.DB = 'unibet';
