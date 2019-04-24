@@ -1,10 +1,8 @@
 import React, { Fragment } from 'react';
-import { connect } from 'react-redux';
 import Carousel from './Carousel/index';
 import ScoreBoard from './Scoreboard';
 
 class Content extends React.Component {
-  handleDataRequest = (eventId) => {};
   render() {
     return (
       <Fragment>
@@ -31,19 +29,14 @@ class Content extends React.Component {
             height="300px"
             totalCount={20}
             onDataRequest={this.handleDataRequest}
-            render={(slideCounter) => <ScoreBoard index={slideCounter} />}
-          >
-            <ScoreBoard index={1} />
-            <ScoreBoard index={2} />
-          </Carousel>
+            render={(index) => (
+              <ScoreBoard event={this.props.records.get(index)} />
+            )}
+          />
         </div>
       </Fragment>
     );
   }
 }
 
-const mapStateToProps = (state) => ({
-  app: state.app,
-});
-
-export default connect(mapStateToProps)(Content);
+export default Content;

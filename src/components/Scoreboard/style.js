@@ -44,4 +44,7 @@ const Time = styled.div`
   color: #867b61;
   font-size: 1em;
 `;
-export { TeamName, ScoreItem, Container, Score, TeamLabelBox, Time };
+const Gap = styled.div`
+  margin-top: ${MARGIN_BETWEEN_TOP_ITEMS};
+`;
+export { Gap, TeamName, ScoreItem, Container, Score, TeamLabelBox, Time };

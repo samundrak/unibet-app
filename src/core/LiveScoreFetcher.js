@@ -11,17 +11,28 @@ type RecordType = {
   state: string,
   id: number,
 };
+type ScoreType = {
+  home: string,
+  away: string,
+};
 class LiveScoreFetcher extends EventEmitter implements ScheduleRunnerContract {
   normalizeRecords(records: Array<{ event: RecordType }>): Array<RecordType> {
     return records.map(
-      ({ event }: { event: RecordType }): RecordType => ({
+      ({
+        event,
+        liveData,
+      }: {
+        event: RecordType,
+        liveData: ScoreType,
+      }): RecordType => ({
         homeName: event.homeName,
         awayName: event.awayName,
         sport: event.sport,
         id: event.id,
         start: event.start,
         state: event.state,
-      }),
+        score: liveData.score,
+      })
     );
   }
 

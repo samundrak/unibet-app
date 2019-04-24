@@ -1,40 +1,38 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-// import 'animate.css';
 import './App.css';
 import SimpleLayout from './components/SimpleLayout';
 import Unibet from './core/Unibet';
-import * as actions from './store/actions/appActions';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      totalRecords: 0,
+    };
+    this._records = new Map();
+  }
   componentDidMount() {
-    console.log(this.store);
     this.controller = new Unibet();
     this.controller.boot();
     this.controller.on(Unibet.EVENT_DATA_STORED, ({ records }) => {
-      console.log(records);
-      this.props.actions.updateAllEvents(records);
+      console.log(records[0]);
+      this.setState({
+        totalRecords: records.length,
+      });
+      records.forEach((element, index) => {
+        this._records.set(index, element);
+      });
     });
   }
 
   render() {
-    return <SimpleLayout controller={this.controller} />;
+    return (
+      <SimpleLayout
+        totalRecords={this.state.totalRecords}
+        records={this._records}
+      />
+    );
   }
 }
 
-const mapStateToProps = (state) => ({
-  app: state.app,
-});
-const mapActionsToProps = (dispatch) => ({
-  actions: bindActionCreators(
-    {
-      ...actions,
-    },
-    dispatch
-  ),
-});
-export default connect(
-  mapStateToProps,
-  mapActionsToProps
-)(App);
+export default App;

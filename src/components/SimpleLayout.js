@@ -4,13 +4,13 @@ import Footer from './Footer';
 import Header from './Header';
 import Content from './Content';
 
-const SimpleLayout = ({ controller }) => {
+const SimpleLayout = ({ totalRecords, records }) => {
   return (
     <LayoutSkeleton
       header={() => <Header />}
       footer={() => <Footer />}
       navbar={() => <div />}
-      content={() => <Content controller={controller} />}
+      content={() => <Content totalRecords={totalRecords} records={records} />}
     />
   );
 };

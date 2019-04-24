@@ -22,7 +22,7 @@ class Carousel extends React.Component {
   autoSlide() {
     setInterval(() => {
       this.next();
-    }, 5000);
+    }, this.props.autoSlideTimeInMS);
   }
 
   next = () => {
@@ -94,7 +94,6 @@ class Carousel extends React.Component {
 }
 
 Carousel.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.element),
   autoSlideTimeInMS: PropTypes.number,
 };
 Carousel.defaultProps = {
