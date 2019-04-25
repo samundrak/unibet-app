@@ -1,29 +1,19 @@
 // @flow
 import EventEmitter from './EventEmitter';
-import type { ScheduleRunnerContract } from '../types/ScheduleRunnerContract';
+import type { ScheduleRunnerContract, RecordType, ScoreType } from '../types';
 import { getScores } from '../api';
 
-type RecordType = {
-  homeName: string,
-  awayName: string,
-  sport: string,
-  start: string,
-  state: string,
-  id: number,
-};
-type ScoreType = {
-  home: string,
-  away: string,
-};
 class LiveScoreFetcher extends EventEmitter implements ScheduleRunnerContract {
-  normalizeRecords(records: Array<{ event: RecordType }>): Array<RecordType> {
+  normalizeRecords(
+    records: Array<{ event: RecordType, liveData: { score: ScoreType } }>,
+  ): Array<RecordType> {
     return records.map(
       ({
         event,
         liveData,
       }: {
         event: RecordType,
-        liveData: ScoreType,
+        liveData: { score: ScoreType },
       }): RecordType => ({
         homeName: event.homeName,
         awayName: event.awayName,
@@ -32,7 +22,7 @@ class LiveScoreFetcher extends EventEmitter implements ScheduleRunnerContract {
         start: event.start,
         state: event.state,
         score: liveData.score,
-      })
+      }),
     );
   }
 

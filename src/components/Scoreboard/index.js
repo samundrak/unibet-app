@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import format from 'date-fns/format';
 import isToday from 'date-fns/is_today';
 import {
@@ -20,24 +21,26 @@ const getIconPathBySport = (sport = '') => {
     imageAvailable.indexOf(normalizedSport) > -1 ? normalizedSport : 'default';
   return `${path}${file}.png`;
 };
+
 const isMatchRunning = (start, state) => {
   if (!start || !state) return false;
   return isToday(start) || state.toLowerCase() === 'started';
 };
-const handleBetClick = (eventId) => {
+
+const handleBetClick = eventId => {
   return () => {
     window.open(
-      `https://www.unibet.com/betting#/event/live/${eventId}`,
-      '_blank'
+      `${process.env.REACT_APP_UNIBET_EVENT_URL}${eventId}`,
+      '_blank',
     );
   };
 };
-const ScoreBoard = ({ event = { score: {} } }) => {
+const ScoreBoard = ({ event = {} }) => {
+  const { score = {} } = event;
   return (
     <Container>
       <Score>
-        <ScoreItem>{event.score.home}</ScoreItem>-
-        <ScoreItem>{event.score.away}</ScoreItem>
+        <ScoreItem>{score.home}</ScoreItem>-<ScoreItem>{score.away}</ScoreItem>
       </Score>
       <TeamLabelBox>
         <img src={getIconPathBySport(event.sport)} alt={event.sport} />
@@ -54,5 +57,18 @@ const ScoreBoard = ({ event = { score: {} } }) => {
       </Gap>
     </Container>
   );
+};
+ScoreBoard.propTypes = {
+  event: PropTypes.shape({
+    homeName: PropTypes.string,
+    awayName: PropTypes.string,
+    start: PropTypes.string,
+    state: PropTypes.string,
+    id: PropTypes.number,
+    score: PropTypes.shape({
+      home: PropTypes.string,
+      away: PropTypes.string,
+    }),
+  }),
 };
 export default ScoreBoard;

@@ -18,11 +18,12 @@ class Storage {
   set(key: string, value: string): DBContract {
     return this.db.set(key, value);
   }
+
   clear() {
     this.db.clear();
   }
+
   bulkCreate(records: Array<any>) {
-    console.log('hello world');
     this.db.bulkCreate(records);
   }
 
