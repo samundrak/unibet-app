@@ -25,7 +25,7 @@ class Carousel extends React.Component {
   }
 
   // We will create a never ending slide by
-  // rotating only 2 elements
+  // translate only 2 elements
   next = () => {
     const slides = this.state.slides;
     slides.fill(true);
@@ -42,11 +42,11 @@ class Carousel extends React.Component {
         this.setState({
           slideCounter,
         });
-      },
+      }
     );
   };
 
-  handleAnimationEnd = index => {
+  handleAnimationEnd = (index) => {
     return () => {
       if (index) {
         const slides = this.state.slides;
@@ -96,7 +96,7 @@ class Carousel extends React.Component {
       <Container
         width={this.props.width}
         height={this.props.height}
-        ref={el => (this._containerEl = el)}
+        ref={(el) => (this._containerEl = el)}
       >
         {this.props.loading && <div className="lds-hourglass" />}
         {this.props.wasErrorFetchingLiveScore && (
