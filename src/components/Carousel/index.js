@@ -41,11 +41,11 @@ class Carousel extends React.Component {
         this.setState({
           slideCounter,
         });
-      }
+      },
     );
   };
 
-  handleAnimationEnd = (index) => {
+  handleAnimationEnd = index => {
     return () => {
       if (index) {
         const slides = this.state.slides;
@@ -70,8 +70,9 @@ class Carousel extends React.Component {
       <Container
         width={this.props.width}
         height={this.props.height}
-        ref={(el) => (this._containerEl = el)}
+        ref={el => (this._containerEl = el)}
       >
+        {this.props.loading && <div className="lds-hourglass" />}
         {this.state.slides.map((slide, index) => {
           return (
             <Item

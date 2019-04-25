@@ -8,15 +8,18 @@ class App extends Component {
     super(props);
     this.state = {
       totalRecords: 0,
+      loading: true,
     };
+
     this._records = new Map();
+    window._records = this._records;
   }
   componentDidMount() {
     this.controller = new Unibet();
     this.controller.boot();
     this.controller.on(Unibet.EVENT_DATA_STORED, ({ records }) => {
-      console.log(records[0]);
       this.setState({
+        loading: false,
         totalRecords: records.length,
       });
       records.forEach((element, index) => {
@@ -27,10 +30,13 @@ class App extends Component {
 
   render() {
     return (
-      <SimpleLayout
-        totalRecords={this.state.totalRecords}
-        records={this._records}
-      />
+      <div>
+        <SimpleLayout
+          loading={this.state.loading}
+          totalRecords={this.state.totalRecords}
+          records={this._records}
+        />
+      </div>
     );
   }
 }

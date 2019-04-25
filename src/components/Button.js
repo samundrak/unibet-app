@@ -7,6 +7,7 @@ const Btn = styled.button`
   border-style: none;
   border-radius: 5px;
   padding: 10px;
+  cursor:pointer;
 `;
 const Button = ({ children, ...rest }) => {
   return <Btn {...rest}>{children}</Btn>;

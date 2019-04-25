@@ -25,11 +25,14 @@ class Content extends React.Component {
         </aside>
         <div id="live-matches">
           <Carousel
+            loading={this.props.loading}
             width="600px"
             height="300px"
             totalCount={20}
             onDataRequest={this.handleDataRequest}
-            render={(index) => (
+            render={index => (
+              console.log(index),
+              console.log(this.props.records.get(index)),
               <ScoreBoard event={this.props.records.get(index)} />
             )}
           />
