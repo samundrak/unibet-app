@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test scoreboard should render scorboard 1`] = `"<div class=\\"sc-bdVaJa gvahtW\\"><div class=\\"sc-bwzfXH duNtlP\\"><div class=\\"sc-htpNat kUJhXk\\">1</div>-<div class=\\"sc-htpNat kUJhXk\\">1</div></div><div class=\\"sc-ifAKCX bNEQGx\\"><img src=\\"/icons/football.png\\" alt=\\"football\\"/><div class=\\"sc-bxivhb fnFrdH\\">samundra</div>-<div class=\\"sc-bxivhb fnFrdH\\"> notsamundra</div></div><div class=\\"sc-EHOje gHoUDM\\">2019-04-26</div><div class=\\"sc-bZQynM kSOmQx\\"><button class=\\"sc-gzVnrw kcIzgI\\">Place a Bet</button></div></div>"`;

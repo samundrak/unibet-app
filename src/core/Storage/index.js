@@ -8,8 +8,9 @@ class Storage {
     this.db = db;
   }
 
-  table(tableName: string): DBContract {
-    return this.db.setTable(tableName);
+  table(tableName: string): Storage {
+    this.db.setTable(tableName);
+    return this;
   }
   get(key: string) {
     return this.db.get(key);

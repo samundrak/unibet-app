@@ -13,7 +13,6 @@ class Dexie implements DBContract {
       records: '++id',
       preferences: 'key',
     });
-    window.dv = this;
   }
 
   setTable(table: string): Dexie {

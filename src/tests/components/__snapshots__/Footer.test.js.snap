@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test Footer should test snapshot 1`] = `"<div class=\\"inner\\"><p>© 1997-2015, Unibet. All rights reserved.</p></div>"`;

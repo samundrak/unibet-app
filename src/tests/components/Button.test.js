@@ -10,7 +10,6 @@ describe('Test button', () => {
   });
 
   it('should call callback function when clicked', () => {
-    const container = document.createElement('div');
     const mockFn = jest.fn();
     const wrapper = shallow(<Button onClick={mockFn}>Simple Button</Button>);
     wrapper.simulate('click');
