@@ -13,6 +13,7 @@ class App extends Component {
     };
 
     this._records = new Map();
+    window.records = this._records;
   }
   componentDidMount() {
     this.controller = new Unibet();
@@ -40,7 +41,7 @@ class App extends Component {
     this.setState({
       wasErrorFetchingLiveScore: false,
       loading: false,
-      totalRecords: records.length,
+      totalRecords: this._records.size,
     });
   };
   render() {

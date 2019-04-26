@@ -2,7 +2,12 @@ import React, { Fragment } from 'react';
 import Carousel from './Carousel/index';
 import ScoreBoard from './Scoreboard';
 
-const Content = ({ loading, records, wasErrorFetchingLiveScore }) => {
+const Content = ({
+  totalRecords,
+  loading,
+  records,
+  wasErrorFetchingLiveScore,
+}) => {
   return (
     <Fragment>
       <h1>Live matches</h1>
@@ -31,7 +36,7 @@ const Content = ({ loading, records, wasErrorFetchingLiveScore }) => {
           loading={loading}
           width="600px"
           height="300px"
-          totalCount={20}
+          totalCount={totalRecords}
           render={index => <ScoreBoard event={records.get(index)} />}
         />
       </div>
