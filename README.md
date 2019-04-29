@@ -1,68 +1,39 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Unibet App
 
-## Available Scripts
+A app which displays score and details of sports which are played or will be played.
+Data are pulled from unibet.com
 
-In the project directory, you can run:
+# Stacks
 
-### `npm start`
+- React
+- Dexie (IndexedDB)
+- Flow Type
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# Run
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+Goto public folder and run it as a root / of webapp
 
-### `npm test`
+# Project Structure
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+modules and class are kept under folder by looking their responsibility
 
-### `npm run build`
+- api/ (for api routes and api calls)
+- components/ (React components which are mostly independent of its surrounding/environment)
+- core/ (core classes which deals with storages, fetching data and scheduling updates)
+- tests/ (test cases of components and cores)
+- types/ (type defination for flow)
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Performance optimization/ Error Logging and Improvments
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+- The carousel is highly customised and it renders only two `div`s due to which size of live events won't effect.
+  It only request data of live event when has to be shown to the user. This helps becuase if we would render `n` items
+  where `n` can be of 90 to100 then while changing state react had to render many dom again.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- We have used dependency inversion principle for storing data which helps us not directly relying on 3rd party code and
+  in future if we have to change our 3rd party library then we can do it easily without effecting our other code because
+  they depends on abstraction.
 
-### `npm run eject`
+- `ScheduleRunner` is a class which runs on provided interval and it will execute task on scheduled time, it helps us controlling
+  `setInterval`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- `flow` type to make code more static, readability and maintaianbility.
